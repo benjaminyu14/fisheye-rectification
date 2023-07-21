@@ -17,7 +17,7 @@ _img_shape = None
 objpoints = []
 imgpoints = []
 
-images = glob.glob('*.png') 
+images = glob.glob('*.jpg') #edit to specify image path
 print("images...",images) 
 gray= None 
 for fname in images:
