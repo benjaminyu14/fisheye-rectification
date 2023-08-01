@@ -1,5 +1,7 @@
-#this is testing the combination of distort and undistort
-#add multi-threading inorder to undisort images real time
+#This is the multi-threaded version of undistorted_frames.py
+#The number of pictures to undistort is divided between 4 threads to handle
+#This script is 100% faster to execute than undistorted_frames.py
+#Edit the multithreading section to add more threads if desired.
 from picamera import PiCamera
 from threading import Thread
 import time
@@ -44,7 +46,6 @@ def images():
     sys.exit() 
     
     
-#the following is undistort
 
 def undistortion(start, end):
     DIM=(1280, 1024)
