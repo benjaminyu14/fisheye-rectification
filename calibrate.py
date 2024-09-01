@@ -4,6 +4,7 @@ import numpy as np
 import os
 import glob
 
+# Specifies which checkerboard dimension used
 CHECKERBOARD = (6,9)
 
 subpix_criteria = (cv2.TERM_CRITERIA_EPS+cv2.TERM_CRITERIA_MAX_ITER, 22, 0.1)
@@ -56,6 +57,8 @@ rms, _, _, _, _ = \
         calibration_flags,
         (cv2.TERM_CRITERIA_EPS+cv2.TERM_CRITERIA_MAX_ITER, 22, 1e-6)
     )
+
+# Outputs K and D constants to copy paste for undistortion script
 print("Found " + str(N_OK) + " valid images for calibration")
 print("DIM=" + str(_img_shape[::-1]))
 print("K=np.array(" + str(K.tolist()) + ")")
