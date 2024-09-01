@@ -34,6 +34,8 @@ def images():
     global c
     c = 1
     print("Entering while")
+    
+    # Capture n number of frames in the video
     while True:
         if c > num_images:
             break
@@ -49,6 +51,8 @@ def images():
 
 def undistortion(start, end):
     DIM=(1280, 1024)
+
+    # These constants are determined by calibrate.py-- copy and pasted
     K=np.array([[288.23012604283355, 0.0, 623.634604791886], [0.0, 286.7591721598898, 504.3570814118297], [0.0, 0.0, 1.0]])
     D=np.array([[0.08146352938392548], [-0.0005017125365272613], [-0.007533972595132653], [-0.01029744592250182]])
 
@@ -60,6 +64,8 @@ def undistortion(start, end):
             img_output_path=img_path_array[1]
             img = cv2.imread(image)
             h, w = img.shape[:2]
+
+            # Rectification and saves new undistorted image
             map1, map2 = cv2.fisheye.initUndistortRectifyMap(K, D, np.eye(3), K, DIM, cv2.CV_16SC2)
             undistorted_img = cv2.remap(img, map1, map2, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)
             cv2.imshow("undistorted", undistorted_img)
@@ -77,6 +83,7 @@ start = 1
 multiple = int(num_images/4)
 end = multiple
 
+# Creates 4 threads to reduce exeuction time
 for i in range (4):
     threads.append(Thread(target = undistortion, args = (start, end,)))
     start += multiple
